@@ -1,2 +1,2 @@
 # ecs-springboot
-deploying spring boot application in ecs
+deploying spring boot application using jenkins,docker & ecs
