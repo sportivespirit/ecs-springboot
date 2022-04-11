@@ -14,10 +14,10 @@ pipeline {
             }
             steps {
                 withCredentials(usernamePassword(credentialsId:'webserver_login', usernameVariable: 'USERNAME',passwordVariable: 'USERPASS') {
-                    sshPublisher{
-                        failOnError: 'true',
-                        continueOnError: 'false',
-                        publishers: {
+                    sshPublisher(
+                        failOnError: true,
+                        continueOnError: false,
+                        publishers: [
                             sshPublishDesc(
                                 configure: 'staging'
                                 sshCredentials: [
@@ -33,8 +33,8 @@ pipeline {
                                     )
                                 ]
                             )
-                        }
-                    }
+                        ]
+                    )
                 }
             }
         }
