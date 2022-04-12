@@ -13,29 +13,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withCredentials([usernamePassword(credentialsId:'webserver_login', usernameVariable: 'USERNAME',passwordVariable: 'USERPASS')]) {
-                    sshPublisher(
-                        failOnError: true,
-                        continueOnError: false,
-                        publishers: [
-                            sshPublisherDesc(
-                                configure: 'staging',
-                                sshCredentials: [
-                                    username: "$USERNAME",
-                                    encryptedPassphrase: "$USERPASS"
-                                ],
-                                transfers: [
-                                    sshTransfer(
-                                        sourceFiles: 'target/springboot-practice-0.0.1-SNAPSHOT.jar',
-                                        removePrefix: 'target/',
-                                        remoteDirectory: '/tmp',
-                                        execCommand: 'java -jar  springboot-practice-0.0.1-SNAPSHOT.jar'
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                }
+                sh 'java -jar target/springboot-practice-0.0.1-SNAPSHOT.jar'
             }
         }
     }
