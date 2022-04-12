@@ -31,7 +31,7 @@ pipeline {
                                         removePrefix: 'target/',
                                         remoteDirectory: '/tmp',
                                         execCommand: 'cd /tmp; java -jar  springboot-practice-0.0.1-SNAPSHOT.jar',
-                                        execTimeout: 0
+                                        execTimeout: 20
                                     )
                                 ]
                             )
