@@ -13,7 +13,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withCredentials([string(credentialsId:'webserver_login', variable: 'USERPASS')]) {
+                withCredentials([usernamePassword(credentialsId:'webserver_login', usernameVariable: 'USERPASS', passwordVariable: 'USERPASS')]) {
                     echo "$USERNAME:$USERPASS"
                     sshPublisher(
                         failOnError: true,
@@ -22,7 +22,7 @@ pipeline {
                             sshPublisherDesc(
                                 configure: 'staging',
                                 sshCredentials: [
-                                    username: 'cloud_user',
+                                    username: "$USERNAME",
                                     encryptedPassphrase: "$USERPASS"
                                 ],
                                 transfers: [
